@@ -161,6 +161,48 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public Boolean signUp(Object userObject) {
+        String userObjectString = userObject.toString();
+        String[] userObjectArray = userObjectString.split("roleUser=");
+        RoleUser roleUser = RoleUser.valueOf(userObjectArray[1].substring(0, userObjectArray[1].length() - 1));
+
+        if (roleUser == RoleUser.Admin) {
+            Admin admin = modelMapper.map(userObject, Admin.class);
+            adminRepository.save(admin);
+            UserDto userDto = new UserDto();
+            userDto.setEmail(admin.getEmail());
+            userDto.setRoleUser(admin.getRoleUser());
+            this.sendCodeVerifyAccount(userDto,"activate your account");
+            return true;
+        } else if (roleUser == RoleUser.Client) {
+            Client client = modelMapper.map(userObject, Client.class);
+            clientRepository.save(client);
+            UserDto userDto = new UserDto();
+            userDto.setEmail(client.getEmail());
+            userDto.setRoleUser(client.getRoleUser());
+            this.sendCodeVerifyAccount(userDto,"activate your account");
+            return true;
+        } else if (roleUser == RoleUser.Agent) {
+            Agent agent = modelMapper.map(userObject, Agent.class);
+            agentRepository.save(agent);
+            UserDto userDto = new UserDto();
+            userDto.setEmail(agent.getEmail());
+            userDto.setRoleUser(agent.getRoleUser());
+            this.sendCodeVerifyAccount(userDto,"activate your account");
+            return true;
+        } else if (roleUser == RoleUser.Societe) {
+            Societe societe = modelMapper.map(userObject, Societe.class);
+            societeRepository.save(societe);
+            UserDto userDto = new UserDto();
+            userDto.setEmail(societe.getEmail());
+            userDto.setRoleUser(societe.getRoleUser());
+            this.sendCodeVerifyAccount(userDto,"activate your account");
+            return true;
+        }
+        return false;
+    }
+
     public Boolean sendCodeVerifyAccount(UserDto userDto,String subject) {
         String email = userDto.getEmail();
         RoleUser roleUser = userDto.getRoleUser();

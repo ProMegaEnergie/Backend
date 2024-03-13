@@ -13,4 +13,6 @@ public interface UserService {
     Boolean sendCodeForgetPassword(UserDto userDto);
 
     Boolean updatePassword(ValidationDto validationDto, String newPassword);
+
+    Boolean signUp(Object userObject);
 }

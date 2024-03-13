@@ -12,4 +12,5 @@ public class VoitureDto {
     private String Matrecule;
     private Batterie batterie;
     private Societe societe;
+    private Float prix;
 }

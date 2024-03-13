@@ -13,6 +13,7 @@ public class Voiture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String Matrecule;
+    private Float prix;
 
     @ManyToOne
     private Batterie batterie;

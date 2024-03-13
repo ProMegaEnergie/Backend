@@ -28,6 +28,10 @@ public class UserController {
             throw new ApiRequestException("User not found");
         return userService.Login(userDto);
     }
+    @PostMapping("signUp")
+    public Boolean signUp(@RequestBody Object userObject) {
+        return userService.signUp(userObject);
+    }
     @PutMapping("activateAccount")
     public Boolean activateAccount(@RequestBody ValidationDto validationDto) {
         if(Optional.ofNullable(userService.activateAccount(validationDto)).isEmpty())
