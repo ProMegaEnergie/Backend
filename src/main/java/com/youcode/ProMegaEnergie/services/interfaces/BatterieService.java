@@ -5,7 +5,6 @@ import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieDto;
 import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieResponseDto;
 import com.youcode.ProMegaEnergie.models.Entities.AchatBatterie;
 import com.youcode.ProMegaEnergie.models.Entities.Batterie;
-import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +27,6 @@ public interface BatterieService {
     Boolean DeleteBatterie(Long id);
 
     List<Batterie> getBatteriesByAchatStatus(String achatStatus);
+
+    List<Batterie> getBatteriesByCherecher(String column, String cherecher);
 }

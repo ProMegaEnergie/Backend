@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class VoitureDto {
     private Long id;
-    private String Matrecule;
+    private String matrecule;
     private Batterie batterie;
     private Societe societe;
     private Float prix;

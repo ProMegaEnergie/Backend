@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class VoitureResponseDto {
     private Long id;
-    private String Matrecule;
+    private String matrecule;
 }

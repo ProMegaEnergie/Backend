@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 public class BatterieResponseDto {
     private Long id;
-    private String Nom;
-    private String Vis;
-    private float Prix;
+    private String nom;
+    private String vis;
+    private float  prix;
     private AchatStatus achatStatus;
 }

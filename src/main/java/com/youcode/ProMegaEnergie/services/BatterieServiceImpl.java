@@ -98,4 +98,23 @@ public class BatterieServiceImpl implements BatterieService {
     public List<Batterie> getBatteriesByAchatStatus(String achatStatus) {
         return batteryRepository.findAllByAchatStatus(AchatStatus.valueOf(achatStatus));
     }
+
+    @Override
+    public List<Batterie> getBatteriesByCherecher(String column, String cherecher) {
+        switch (column) {
+            case "prix" -> {
+                return batteryRepository.findAllByPrixAndAchatStatus(Float.parseFloat(cherecher), AchatStatus.NotPayed);
+            }
+            case "nom" -> {
+                return batteryRepository.findAllByNomAndAchatStatus(cherecher, AchatStatus.NotPayed);
+            }
+            case "prix_nom" -> {
+                String[] cherecherArray = cherecher.split(",");
+                float prix = Float.parseFloat(cherecherArray[0]);
+                String nom = cherecherArray[1];
+                return batteryRepository.findAllByPrixAndNomAndAchatStatus(prix, nom, AchatStatus.NotPayed);
+            }
+        }
+        return null;
+    }
 }

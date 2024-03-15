@@ -13,7 +13,7 @@ public class Voiture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Matrecule;
+    private String matrecule;
     private Float prix;
 
     @Enumerated(EnumType.STRING)

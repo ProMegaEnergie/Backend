@@ -13,9 +13,9 @@ public class Batterie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Nom;
-    private String Vis;
-    private float Prix;
+    private String nom;
+    private String vis;
+    private float prix;
     @Enumerated(EnumType.STRING)
     private AchatStatus achatStatus;
     @ManyToOne

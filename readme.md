@@ -13,7 +13,7 @@
 ## End-point: Read All Batteries By Achat Status
 ### Method: GET
 >```
->http://localhost:8080/api/Batterie/ReadBatteries/NotPayed
+>http://localhost:8080/api/Batterie/ReadBatteries/:AchatStatus
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -21,7 +21,7 @@
 ## End-point: Read Battery By Id agent
 ### Method: GET
 >```
->http://localhost:8080/api/Batterie/ReadBattery/1
+>http://localhost:8080/api/Batterie/ReadBattery/:idAgent
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -29,7 +29,7 @@
 ## End-point: Read Battery By Id Battery And By Id agent
 ### Method: GET
 >```
->http://localhost:8080/api/Batterie/ReadBattery/1/1
+>http://localhost:8080/api/Batterie/ReadBattery/:idBattery/:idAgent
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -46,9 +46,9 @@
     "agent": {
         "id": 1
     },
-    "nom": "Li-ion",
-    "prix": 10000.0,
-    "vis": "150 Wh/km"
+    "nom": "NAME",
+    "prix": "PRICE", // PRICE : type Long | exemple : 1000
+    "vis": "VIS" // VIS : type String | exemple : 150 Wh/km
 }
 ```
 
@@ -64,13 +64,13 @@
 
 ```json
 {
-    "id": 6,
+    "id":6,
     "agent": {
         "id": 1
     },
-    "nom": "Li-ion",
-    "prix": 10000.0,
-    "vis": "1000 Wh/km"
+    "nom": "NAME",
+    "prix": "PRICE", // PRICE : type Long | exemple : 1000
+    "vis": "VIS" // VIS : type String | exemple : 150 Wh/km
 }
 ```
 
@@ -80,20 +80,12 @@
 ## End-point: Delete Battery
 ### Method: DELETE
 >```
->http://localhost:8080/api/Batterie/DeleteBattery/6
+>http://localhost:8080/api/Batterie/DeleteBattery/:ifBattery
 >```
 ### Body (**raw**)
 
 ```json
-{
-    "id": 4,
-    "agent": {
-        "id": 1
-    },
-    "nom": "Li-ion",
-    "prix": 10000.0,
-    "vis": "100 Wh/km"
-}
+
 ```
 
 
@@ -121,10 +113,18 @@
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: getAllBatterieAchterParSocieteParIdSociete
+## End-point: getAllBatterieAchterParSociete
 ### Method: GET
 >```
->http://localhost:8080/api/Batterie/getBatteriesAchetes/5
+>http://localhost:8080/api/Batterie/getBatteriesAchetes/:idSociete
+>```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: search batterie by price or name or (price and name)
+### Method: GET
+>```
+>http://localhost:8080/api/Batterie/cherecherBatteries/:choix/:value
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -156,21 +156,11 @@
 ### Body (**raw**)
 
 ```json
-//{
-  //"email": "USERNAME@gmail.com",
-  //"code": 522488,
-  //"roleUser": "Societe"
-//}
 {
-  "email": "USERNAME@gmail.com",
-  "code": 522488,
-  "roleUser": "Client"
+    "email": "PASSWORD@gmail.com",
+    "code": 522488,
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
-//{
- // "email": "USERNAME@gmail.com",
- // "code": 522488,
-//  "roleUser": "Agent"
-//}
 ```
 
 
@@ -184,18 +174,10 @@
 ### Body (**raw**)
 
 ```json
-//{
-//  "email": "USERNAME@gmail.com",
- // "roleUser": "Societe"
-//}
 {
-  "email": "USERNAME@gmail.com",
-  "roleUser": "Client"
+    "email": "USERNAME@gmail.com",
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
-//{
-//  "email": "USERNAME@gmail.com",
-//  "roleUser": "Agent"
-//}
 ```
 
 
@@ -204,26 +186,16 @@
 ## End-point: Update Password In forget Password
 ### Method: PUT
 >```
->http://localhost:8080/api/User/forgetPassword/NEW_PASSWORD
+>http://localhost:8080/api/User/forgetPassword/:newPassword
 >```
 ### Body (**raw**)
 
 ```json
-//{
-//"email": "USERNAME@gmail.com",
-//"code": 522488,
-//"roleUser": "Societe"
-//}
 {
-  "email": "USERNAME@gmail.com",
-  "code": 522488,
-  "roleUser": "Client"
+    "email": "PASSWORD@gmail.com",
+    "code": 522488,
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
-//{
-// "email": "USERNAME@gmail.com",
-// "code": 522488,
-//  "roleUser": "Agent"
-//}
 ```
 
 
@@ -237,27 +209,32 @@
 ### Body (**raw**)
 
 ```json
+// Societe
 // {
 //     "email": "USERNAME@gmail.com",
 //     "password": "PASSWORD",
-//     "image": "Dacia.png",
-//     "nom": "Dacia",
+//     "image": "IMAGE",
+//     "nom": "NAME",
 //     "isVerifie": false,
 //     "roleUser": "Societe"
 // }
+
+// Client
 {
     "email": "USERNAME@gmail.com",
     "password": "PASSWORD",
-    "nom": "YOUR_LAST_NAME",
-    "prenom": "YOUR_FIRST_NAME",
+    "nom": "LAST_NAME",
+    "prenom": "FIRST_NAME",
     "isVerifie": false,
     "roleUser": "Client"
 }
+
+//Agent
 // {
 //     "email": "USERNAME@gmail.com",
 //     "password": "PASSWORD",
-//     "prenom": "YOUR_FIRST_NAME",
-//     "nom": "YOUR_LAST_NAME",
+//     "prenom": "FIRST_NAME",
+//     "nom": "LAST_NAME",
 //     "isVerifie": false,
 //     "roleUser": "Agent"
 // }
@@ -269,7 +246,7 @@
 ## End-point: get all by role user
 ### Method: GET
 >```
->http://localhost:8080/api/User/all/Societe
+>http://localhost:8080/api/User/all/:roleUser
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -277,123 +254,81 @@
 ## End-point: get user by role user and id user
 ### Method: GET
 >```
->http://localhost:8080/api/User/user/Agent/1
+>http://localhost:8080/api/User/user/:roleUser/:iduser
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: add Client
+## End-point: add user by userRole
 ### Method: POST
 >```
->http://localhost:8080/api/User/create/Client
+>http://localhost:8080/api/User/create/:userRole
 >```
 ### Body (**raw**)
 
 ```json
+// Client
 {
-    "email": "USENAME@gmail.com",
+    "email": "USERNAME@gmail.com",
     "password": "PASSWORD",
-    "prenom": "YOUR_FIRST_NAME",
-    "nom": "YOUR_LAST_NAME"
+    "prenom": "FIRST_NAME",
+    "nom": "LAST_NAME"
 }
+
+// Agent
+// {
+//     "email": "USERNAME@gmail.com",
+//     "password": "PASSWORD",
+//     "prenom": "FIRST_NAME",
+//     "nom": "LAST_NAME",
+// }
+
+// Sosiete
+// {
+//     "email": "USERNAME@gmail.com",
+//     "password": "PASSWORD",
+//     "image": "IMAGE",
+//     "nom": "NAME","
+// }
 ```
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: update Client
+## End-point: update  user by userRole
 ### Method: PUT
 >```
->http://localhost:8080/api/User/update/Client
+>http://localhost:8080/api/User/update/:userRole
 >```
 ### Body (**raw**)
 
 ```json
-    {
-        "id":1,
-        "email": "USENAME@gmail.com",
-        "password": "PASSWORD",
-        "prenom": "YOUR_FIRST_NAMEUpdate",
-        "nom": "YOUR_LAST_NAME"
-    }
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: add Societe
-### Method: POST
->```
->http://localhost:8080/api/User/create/Societe
->```
-### Body (**raw**)
-
-```json
-{
-    "email": "USENAME@gmail.com",
-    "password": "PASSWORD",
-    "image": "Dacia.png",
-    "nom": "Dacia"
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: update Societe
-### Method: PUT
->```
->http://localhost:8080/api/User/update/Societe
->```
-### Body (**raw**)
-
-```json
+// Client
 {
     "id":1,
-    "email": "USENAME@gmail.com",
+    "email": "USERNAME@gmail.com",
     "password": "PASSWORD",
-    "image": "Dacia.png",
-    "nom": "DaciaUpdate"
+    "prenom": "FIRST_NAME",
+    "nom": "LAST_NAME"
 }
-```
 
+// Agent
+// {
+//     "id":1,
+//     "email": "USERNAME@gmail.com",
+//     "password": "PASSWORD",
+//     "prenom": "FIRST_NAME",
+//     "nom": "LAST_NAME",
+// }
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: add Agent
-### Method: POST
->```
->http://localhost:8080/api/User/create/Agent
->```
-### Body (**raw**)
-
-```json
-{
-    "email": "USENAME@gmail.com",
-    "password": "PASSWORD",
-    "prenom": "YOUR_FIRST_NAME",
-    "nom": "YOUR_LAST_NAME"
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: update Agent
-### Method: PUT
->```
->http://localhost:8080/api/User/update/Agent
->```
-### Body (**raw**)
-
-```json
-{
-    "id":1,
-    "email": "USENAME@gmail.com",
-    "password": "PASSWORD",
-    "prenom": "YOUR_FIRST_NAMEUpdate",
-    "nom": "YOUR_LAST_NAME"
-}
+// Sosiete
+// {
+//     "id":1,
+//     "email": "USERNAME@gmail.com",
+//     "password": "PASSWORD",
+//     "image": "IMAGE",
+//     "nom": "NAME","
+// }
 ```
 
 
@@ -402,120 +337,7 @@
 ## End-point: Delete user by role user and id user
 ### Method: DELETE
 >```
->http://localhost:8080/api/User/delete/Agent/1
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-# 📁 Folder: Societe
-
-
-## End-point: Sign Up
-### Method: POST
->```
->http://localhost:8080/api/Societe/signUp
->```
-### Body (**raw**)
-
-```json
-{
-    "email": "USENAME@gmail.com",
-    "password": "PASSWORD",
-    "image": "Dacia.png",
-    "nom": "Dacia"
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Batterie To Acheter
-### Method: GET
->```
->http://localhost:8080/api/Societe/AcheterBatterie
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Get Batterie deja Acheter
-### Method: GET
->```
->http://localhost:8080/api/Societe/getBatteriesAchetes/4
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Acheter Batterie
-### Method: POST
->```
->http://localhost:8080/api/Societe/AcheterBatterie
->```
-### Body (**raw**)
-
-```json
-{
-    "batterie": {
-        "id": 2
-    },
-    "societe": {
-        "id": 4
-    }
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: Create Voiture
-### Method: POST
->```
->http://localhost:8080/api/Societe/createVoiture
->```
-### Body (**raw**)
-
-```json
-{
-    "batterie": {
-        "id": 2
-    },
-    "societe": {
-        "id": 4
-    },
-    "matrecule": "0000001 a 20",
-    "prix": 300000
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: update voiture
-### Method: PUT
->```
->http://localhost:8080/api/Societe/updateVoiture
->```
-### Body (**raw**)
-
-```json
-{
-    "id":1,
-    "batterie": {
-        "id": 2
-    },
-    "societe": {
-        "id": 4
-    },
-    "matrecule": "0000001 a 20",
-    "prix": 30000
-}
-```
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-## End-point: read Voiture By Id Societe
-### Method: GET
->```
->http://localhost:8080/api/Societe/readVoitureByIdSociete/4
+>http://localhost:8080/api/User/delete/:userRole/:idUser
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -533,7 +355,7 @@
 ## End-point: GetAllVoituresByStatus
 ### Method: GET
 >```
->http://localhost:8080/api/Voiture/readVoitures/NotPayed
+>http://localhost:8080/api/Voiture/readVoitures/:AchatStatus
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -541,7 +363,7 @@
 ## End-point: readVoituresByIdSociete
 ### Method: GET
 >```
->http://localhost:8080/api/Voiture/readVoitureByIdSociete/5
+>http://localhost:8080/api/Voiture/readVoitureByIdSociete/:IdSociete
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -549,7 +371,15 @@
 ## End-point: readVoitureByIdVoiture
 ### Method: GET
 >```
->http://localhost:8080/api/Voiture/readVoitureByIdVoiture/4
+>http://localhost:8080/api/Voiture/readVoitureByIdVoiture/:IdVoiture
+>```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: search voiture by price or matrecule or (price and matrecule)
+### Method: GET
+>```
+>http://localhost:8080/api/Voiture/cherecherVoitures/:choix/:value
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -563,14 +393,14 @@
 
 ```json
 {
-    "prix": 20000.0,
+    "prix": "PRICE", // PRICE : type Long | exemple : 1000
     "batterie": {
         "id": 7
     },
     "societe": {
         "id": 5
     },
-    "matrecule": "Dacia Logan"
+    "matrecule": "MATRECULE" // type :String
 }
 ```
 
@@ -586,17 +416,25 @@
 
 ```json
 {
-    "id": 6,
-    "prix": 20000.0,
+    "id" : 6,
+    "prix": "PRICE", // PRICE : type Long | exemple : 1000
     "batterie": {
-        "id": 1
+        "id": 7
     },
     "societe": {
         "id": 5
     },
-    "matrecule": "Dacia Sandero"
+    "matrecule": "MATRECULE" // type :String
 }
 ```
 
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Delete Voiture
+### Method: DELETE
+>```
+>http://localhost:8080/api/Voiture/deleteVoiture/:id
+>```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃

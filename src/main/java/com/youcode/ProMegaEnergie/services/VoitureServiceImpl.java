@@ -2,6 +2,7 @@ package com.youcode.ProMegaEnergie.services;
 
 import com.youcode.ProMegaEnergie.models.Dtos.VoitureDto.VoitureDto;
 import com.youcode.ProMegaEnergie.models.Entities.AchatBatterie;
+import com.youcode.ProMegaEnergie.models.Entities.Batterie;
 import com.youcode.ProMegaEnergie.models.Entities.Voiture;
 import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import com.youcode.ProMegaEnergie.models.Enums.StatusBattery;
@@ -78,5 +79,33 @@ public class VoitureServiceImpl implements VoitureService {
     @Override
     public List<Voiture> readAllVoitureByAchatStatus(AchatStatus achatStatus) {
         return voitureRepository.findAllByAchatStatus(achatStatus);
+    }
+
+    @Override
+    public List<Voiture> getVoituresByCherecher(String column, String cherecher) {
+        switch (column){
+            case "prix" -> {
+                return voitureRepository.findAllByPrixAndAchatStatus(Float.parseFloat(cherecher), AchatStatus.NotPayed);
+            }
+            case "matrecule" -> {
+                return voitureRepository.findAllByMatreculeAndAchatStatus(cherecher, AchatStatus.NotPayed);
+            }
+            case "prix_matrecule" -> {
+                String[] cherecherArray = cherecher.split(",");
+                float prix = Float.parseFloat(cherecherArray[0]);
+                String matrecule = cherecherArray[1];
+                return voitureRepository.findAllByPrixAndMatreculeAndAchatStatus(prix, matrecule, AchatStatus.NotPayed);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean deleteVoiture(Long idVoiture) {
+        if (voitureRepository.existsById(idVoiture)){
+            voitureRepository.deleteById(idVoiture);
+            return true;
+        }
+        return false;
     }
 }

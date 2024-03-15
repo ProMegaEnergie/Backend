@@ -31,6 +31,10 @@ public class BatterieController {
     public List<Batterie> getBatteriesByAchatStatus(@PathVariable String AchatStatus){
         return batterieService.getBatteriesByAchatStatus(AchatStatus);
     }
+    @GetMapping("/cherecherBatteries/{column}/{cherecher}")
+    public List<Batterie> getBatteriesByCherecher(@PathVariable String column ,@PathVariable String cherecher){
+        return batterieService.getBatteriesByCherecher(column,cherecher);
+    }
     @GetMapping("/ReadBattery/{idAgent}")
     public List<Batterie> ReadBattery(@PathVariable Long idAgent){
         return batterieService.ReadBatterie(idAgent);

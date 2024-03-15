@@ -29,6 +29,10 @@ public class VoitureController {
     public List<Voiture> readAllVoitureByAchatStatus(@PathVariable AchatStatus AchatStatus){
         return voitureService.readAllVoitureByAchatStatus(AchatStatus);
     }
+    @GetMapping("/cherecherVoitures/{column}/{cherecher}")
+    public List<Voiture> getVoituresByCherecher(@PathVariable String column ,@PathVariable String cherecher){
+        return voitureService.getVoituresByCherecher(column, cherecher);
+    }
     @GetMapping("/readVoitureByIdSociete/{idSociete}")
     public List<Voiture> readAllVoiture(@PathVariable Long idSociete){
         return voitureService.getAllVoiture(idSociete);
@@ -44,5 +48,9 @@ public class VoitureController {
     @PutMapping("/updateVoiture")
     public Boolean updateVoiture(@RequestBody VoitureDto voitureDto){
         return voitureService.updateVoiture(voitureDto);
+    }
+    @DeleteMapping("/deleteVoiture/{idVoiture}")
+    public Boolean deleteVoiture(@PathVariable Long idVoiture){
+        return voitureService.deleteVoiture(idVoiture);
     }
 }

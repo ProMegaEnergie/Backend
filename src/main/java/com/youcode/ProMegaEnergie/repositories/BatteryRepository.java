@@ -11,4 +11,7 @@ public interface BatteryRepository extends JpaRepository<Batterie, Long> {
     Optional<Batterie> findByIdAndAgent_Id(Long id, Long idAgent);
     List<Batterie> findAllByAgent_Id(Long idAgent);
     List<Batterie> findAllByAchatStatus(AchatStatus achatStatus);
+    List<Batterie> findAllByPrixAndAchatStatus(float Prix, AchatStatus achatStatus);
+    List<Batterie> findAllByPrixAndNomAndAchatStatus(float Prix, String nom, AchatStatus achatStatus);
+    List<Batterie> findAllByNomAndAchatStatus(String cherecher, AchatStatus achatStatus);
 }

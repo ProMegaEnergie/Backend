@@ -1,6 +1,7 @@
 package com.youcode.ProMegaEnergie.services.interfaces;
 
 import com.youcode.ProMegaEnergie.models.Dtos.VoitureDto.VoitureDto;
+import com.youcode.ProMegaEnergie.models.Entities.Batterie;
 import com.youcode.ProMegaEnergie.models.Entities.Voiture;
 import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 
@@ -20,4 +21,8 @@ public interface VoitureService {
     Boolean updateVoiture(VoitureDto voitureDto);
 
     List<Voiture> readAllVoitureByAchatStatus(AchatStatus achatStatus);
+
+    List<Voiture> getVoituresByCherecher(String column, String cherecher);
+
+    Boolean deleteVoiture(Long idVoiture);
 }
