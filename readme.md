@@ -82,12 +82,6 @@
 >```
 >http://localhost:8080/api/Batterie/DeleteBattery/:ifBattery
 >```
-### Body (**raw**)
-
-```json
-
-```
-
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -393,14 +387,14 @@
 
 ```json
 {
-    "prix": "PRICE", // PRICE : type Long | exemple : 1000
-    "batterie": {
-        "id": 7
-    },
-    "societe": {
-        "id": 5
-    },
-    "matrecule": "MATRECULE" // type :String
+  "prix": "PRICE", // PRICE : type Long | exemple : 1000
+  "batterie": {
+    "id": 7
+  },
+  "societe": {
+    "id": 5
+  },
+  "matrecule": "MATRECULE" // type :String
 }
 ```
 
@@ -416,15 +410,15 @@
 
 ```json
 {
-    "id" : 6,
-    "prix": "PRICE", // PRICE : type Long | exemple : 1000
-    "batterie": {
-        "id": 7
-    },
-    "societe": {
-        "id": 5
-    },
-    "matrecule": "MATRECULE" // type :String
+  "id" : 6,
+  "prix": "PRICE", // PRICE : type Long | exemple : 1000
+  "batterie": {
+    "id": 7
+  },
+  "societe": {
+    "id": 5
+  },
+  "matrecule": "MATRECULE" // type :String
 }
 ```
 
