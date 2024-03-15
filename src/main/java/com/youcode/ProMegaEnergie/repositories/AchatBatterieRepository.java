@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface AchatBatterieRepository extends JpaRepository<AchatBatterie, Long> {
     List<AchatBatterie> findAllBySocieteId(Long idSociete);
+
+    AchatBatterie findBySocieteIdAndBatterieId(Long id, Long id1);
+
+    boolean existsBySocieteIdAndBatterieId(Long idSociete, Long idBatterie);
 }

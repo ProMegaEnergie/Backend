@@ -5,6 +5,7 @@ import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieDto;
 import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieResponseDto;
 import com.youcode.ProMegaEnergie.models.Entities.AchatBatterie;
 import com.youcode.ProMegaEnergie.models.Entities.Batterie;
+import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import com.youcode.ProMegaEnergie.services.interfaces.BatterieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,10 @@ public class BatterieController {
     @GetMapping("/ReadBatteries")
     public List<Batterie> getBatteries(){
         return batterieService.getBatteries();
+    }
+    @GetMapping("/ReadBatteries/{AchatStatus}")
+    public List<Batterie> getBatteriesByAchatStatus(@PathVariable String AchatStatus){
+        return batterieService.getBatteriesByAchatStatus(AchatStatus);
     }
     @GetMapping("/ReadBattery/{idAgent}")
     public List<Batterie> ReadBattery(@PathVariable Long idAgent){

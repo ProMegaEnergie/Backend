@@ -1,5 +1,6 @@
 package com.youcode.ProMegaEnergie.models.Entities;
 
+import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,9 @@ public class Voiture {
     private Long id;
     private String Matrecule;
     private Float prix;
+
+    @Enumerated(EnumType.STRING)
+    private AchatStatus achatStatus;
 
     @ManyToOne
     private Batterie batterie;

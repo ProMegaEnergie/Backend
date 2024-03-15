@@ -5,8 +5,12 @@ import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieDto;
 import com.youcode.ProMegaEnergie.models.Dtos.BatterieDto.BatterieResponseDto;
 import com.youcode.ProMegaEnergie.models.Entities.AchatBatterie;
 import com.youcode.ProMegaEnergie.models.Entities.Batterie;
+import com.youcode.ProMegaEnergie.models.Entities.Societe;
+import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
+import com.youcode.ProMegaEnergie.models.Enums.StatusBattery;
 import com.youcode.ProMegaEnergie.repositories.AchatBatterieRepository;
 import com.youcode.ProMegaEnergie.repositories.BatteryRepository;
+import com.youcode.ProMegaEnergie.repositories.SocieteRepository;
 import com.youcode.ProMegaEnergie.services.interfaces.BatterieService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,11 +21,13 @@ import java.util.Optional;
 @Service
 public class BatterieServiceImpl implements BatterieService {
     private final BatteryRepository batteryRepository;
+    private final SocieteRepository societeRepository;
     private final AchatBatterieRepository achatBatterieRepository;
     private final ModelMapper modelMapper;
 
-    public BatterieServiceImpl(BatteryRepository batteryRepository, AchatBatterieRepository achatBatterieRepository, ModelMapper modelMapper) {
+    public BatterieServiceImpl(BatteryRepository batteryRepository, SocieteRepository societeRepository, AchatBatterieRepository achatBatterieRepository, ModelMapper modelMapper) {
         this.batteryRepository = batteryRepository;
+        this.societeRepository = societeRepository;
         this.achatBatterieRepository = achatBatterieRepository;
         this.modelMapper = modelMapper;
     }
@@ -33,9 +39,21 @@ public class BatterieServiceImpl implements BatterieService {
 
     @Override
     public Boolean acheterBatterie(AchatBatterieDto achatBatterieDto) {
-        AchatBatterie achatBatterie = modelMapper.map(achatBatterieDto, AchatBatterie.class);
-        achatBatterieRepository.save(achatBatterie);
-        return true;
+        Long idSociete = achatBatterieDto.getSociete().getId();
+        Optional<Societe> societe = societeRepository.findById(idSociete);
+
+        Long idBatterie = achatBatterieDto.getBatterie().getId();
+        Optional<Batterie> batterie = batteryRepository.findById(idBatterie);
+        if (batterie.isEmpty() || societe.isEmpty() || batterie.get().getAchatStatus() == AchatStatus.Payed){
+            return false;
+        } else {
+            batterie.get().setAchatStatus(AchatStatus.Payed);
+            batteryRepository.save(batterie.get());
+            AchatBatterie achatBatterie = modelMapper.map(achatBatterieDto, AchatBatterie.class);
+            achatBatterie.setStatusBattery(StatusBattery.Inactive);
+            achatBatterieRepository.save(achatBatterie);
+            return true;
+        }
     }
 
     @Override
@@ -47,6 +65,7 @@ public class BatterieServiceImpl implements BatterieService {
     @Override
     public BatterieResponseDto CreateBatterie(BatterieDto batterieDto) {
         Batterie batterie = modelMapper.map(batterieDto, Batterie.class);
+        batterie.setAchatStatus(AchatStatus.NotPayed);
         batterie = batteryRepository.save(batterie);
         return modelMapper.map(batterie, BatterieResponseDto.class);
     }
@@ -73,5 +92,10 @@ public class BatterieServiceImpl implements BatterieService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Batterie> getBatteriesByAchatStatus(String achatStatus) {
+        return batteryRepository.findAllByAchatStatus(AchatStatus.valueOf(achatStatus));
     }
 }

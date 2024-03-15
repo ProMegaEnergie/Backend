@@ -1,5 +1,6 @@
 package com.youcode.ProMegaEnergie.models.Dtos.AchatBatterieDto;
 
+import com.youcode.ProMegaEnergie.models.Enums.StatusBattery;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,4 +8,5 @@ import lombok.Setter;
 @Setter
 public class AchatBatterieResponseDto {
     private Long id;
+    private StatusBattery statusBattery;
 }

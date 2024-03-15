@@ -2,6 +2,7 @@ package com.youcode.ProMegaEnergie.controllers;
 
 import com.youcode.ProMegaEnergie.models.Dtos.VoitureDto.VoitureDto;
 import com.youcode.ProMegaEnergie.models.Entities.Voiture;
+import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import com.youcode.ProMegaEnergie.services.interfaces.VoitureService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,10 @@ public class VoitureController {
     @GetMapping("/readVoiture")
     public List<Voiture> readAllVoiture(){
         return voitureService.getAllVoiture();
+    }
+    @GetMapping("/readVoitures/{AchatStatus}")
+    public List<Voiture> readAllVoitureByAchatStatus(@PathVariable AchatStatus AchatStatus){
+        return voitureService.readAllVoitureByAchatStatus(AchatStatus);
     }
     @GetMapping("/readVoitureByIdSociete/{idSociete}")
     public List<Voiture> readAllVoiture(@PathVariable Long idSociete){
