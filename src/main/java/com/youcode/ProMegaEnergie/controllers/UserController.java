@@ -34,7 +34,7 @@ public class UserController {
         return userService.signUp(userObject);
     }
     @PutMapping("activateAccount")
-    public Boolean activateAccount(@RequestBody ValidationDto validationDto) {
+    public Boolean deactivateAccount(@RequestBody ValidationDto validationDto) {
         if(Optional.ofNullable(userService.activateAccount(validationDto)).isEmpty())
             throw new ApiRequestException("Code not found");
         return userService.activateAccount(validationDto);

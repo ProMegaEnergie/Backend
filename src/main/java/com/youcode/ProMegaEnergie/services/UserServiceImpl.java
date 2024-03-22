@@ -301,25 +301,24 @@ public class UserServiceImpl implements UserService {
         Long id = Long.parseLong(objectStringId.split("id=")[1]);
         String email = objectStringEmail.split("email=")[1];
         String password = objectStringPassword.split("password=")[1];
-        if (adminRepository.existsByEmail(email) || agentRepository.existsByEmail(email) || clientRepository.existsByEmail(email) || societeRepository.existsByEmail(email)) {
-
-            if (roleUser == RoleUser.Admin) {
-                Admin admin = getAdminInUpdate(id, email, password);
-                return adminRepository.save(admin);
-            } else if (roleUser == RoleUser.Agent) {
-                Agent agent = getAgentInUpdate(objectStringArray, id, email, password);
-                return agentRepository.save(agent);
-            } else if (roleUser == RoleUser.Client) {
-                Client client = getClientInUpdate(objectStringArray, id, email, password);
-                client.setIsVerifie(true);
-                return clientRepository.save(client);
-            } else if (roleUser == RoleUser.Societe) {
-                Societe societe = getSocieteInUpdate(objectStringArray, id, email, password);
-                societe.setIsVerifie(true);
-                return societeRepository.save(societe);
-            } else {
-                return null;
-            }
+        if (roleUser == RoleUser.Admin) {
+            Admin admin = getAdminInUpdate(id, email, password);
+            return adminRepository.save(admin);
+        } else if (roleUser == RoleUser.Agent) {
+            Agent agent = getAgentInUpdate(objectStringArray, id, email, password);
+            agent.setRoleUser(RoleUser.Agent);
+            agent.setIsVerifie(true);
+            return agentRepository.save(agent);
+        } else if (roleUser == RoleUser.Client) {
+            Client client = getClientInUpdate(objectStringArray, id, email, password);
+            client.setRoleUser(RoleUser.Client);
+            client.setIsVerifie(true);
+            return clientRepository.save(client);
+        } else if (roleUser == RoleUser.Societe) {
+            Societe societe = getSocieteInUpdate(objectStringArray, id, email, password);
+            societe.setRoleUser(RoleUser.Societe);
+            societe.setIsVerifie(true);
+            return societeRepository.save(societe);
         } else {
             return null;
         }
