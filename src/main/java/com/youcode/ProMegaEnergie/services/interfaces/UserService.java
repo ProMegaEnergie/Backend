@@ -11,7 +11,7 @@ public interface UserService {
     Optional Login (UserDto userDto);
     Boolean activateAccount (ValidationDto validationDto);
 
-    Boolean sendCodeForgetPassword(UserDto userDto);
+    RoleUser sendCodeForgetPassword(String email);
 
     Boolean updatePassword(ValidationDto validationDto, String newPassword);
 

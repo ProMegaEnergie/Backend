@@ -99,34 +99,34 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    @Override
-    public Boolean sendCodeForgetPassword(UserDto userDto) {
-        if (userDto.getRoleUser() == RoleUser.Admin) {
-            Admin admin = adminRepository.findByEmail(userDto.getEmail()).orElse(null);
-            if (admin == null) {
-                throw new ApiRequestException("Admin not found");
-            }
-            return sendCodeVerifyAccount(userDto,"reset your password");
-        } else if (userDto.getRoleUser() == RoleUser.Client) {
-            Client client = clientRepository.findByEmail(userDto.getEmail()).orElse(null);
-            if (client == null) {
-                throw new ApiRequestException("Client not found");
-            }
-            return sendCodeVerifyAccount(userDto,"reset your password");
-        } else if (userDto.getRoleUser() == RoleUser.Agent) {
-            Agent agent = agentRepository.findByEmail(userDto.getEmail()).orElse(null);
-            if (agent == null) {
-                throw new ApiRequestException("Agent not found");
-            }
-            return sendCodeVerifyAccount(userDto,"reset your password");
-        } else if (userDto.getRoleUser() == RoleUser.Societe) {
-            Societe societe = societeRepository.findByEmail(userDto.getEmail()).orElse(null);
-            if (societe == null) {
-                throw new ApiRequestException("Societe not found");
-            }
-            return sendCodeVerifyAccount(userDto,"reset your password");
+    public RoleUser sendCodeForgetPassword(String email) {
+
+        if (adminRepository.existsByEmail(email)) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(email);
+            userDto.setRoleUser(RoleUser.Admin);
+            this.sendCodeVerifyAccount(userDto,"reset your password");
+            return RoleUser.Admin;
+        } else if (clientRepository.existsByEmail(email)) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(email);
+            userDto.setRoleUser(RoleUser.Client);
+            this.sendCodeVerifyAccount(userDto,"reset your password");
+            return RoleUser.Client;
+        } else if (agentRepository.existsByEmail(email)) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(email);
+            userDto.setRoleUser(RoleUser.Agent);
+            this.sendCodeVerifyAccount(userDto,"reset your password");
+            return RoleUser.Agent;
+        } else if (societeRepository.existsByEmail(email)) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(email);
+            userDto.setRoleUser(RoleUser.Societe);
+            this.sendCodeVerifyAccount(userDto,"reset your password");
+            return RoleUser.Societe;
         }
-        return false;
+        return null;
     }
 
     @Override

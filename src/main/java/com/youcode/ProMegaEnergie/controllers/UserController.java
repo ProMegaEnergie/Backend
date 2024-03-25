@@ -39,11 +39,11 @@ public class UserController {
             throw new ApiRequestException("Code not found");
         return userService.activateAccount(validationDto);
     }
-    @PostMapping("forgetPassword")
-    public Boolean forgetPassword(@RequestBody UserDto userDto) {
-        if(Optional.ofNullable(userService.sendCodeForgetPassword(userDto)).isEmpty())
+    @GetMapping("forgetPassword/{email}")
+    public RoleUser forgetPassword(@PathVariable String email) {
+        if(Optional.ofNullable(userService.sendCodeForgetPassword(email)).isEmpty())
             throw new ApiRequestException("User not found");
-        return userService.sendCodeForgetPassword(userDto);
+        return userService.sendCodeForgetPassword(email);
     }
     @PutMapping("forgetPassword/{newPassword}")
     public Boolean forgetPassword(@RequestBody ValidationDto validationDto , @PathVariable String newPassword) {
