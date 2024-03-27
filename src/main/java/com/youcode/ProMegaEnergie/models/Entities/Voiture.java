@@ -15,6 +15,7 @@ public class Voiture {
     private Long id;
     private String matrecule;
     private Float prix;
+    private String image;
 
     @Enumerated(EnumType.STRING)
     private AchatStatus achatStatus;

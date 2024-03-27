@@ -13,4 +13,5 @@ public class VoitureDto {
     private Batterie batterie;
     private Societe societe;
     private Float prix;
+    private String image;
 }

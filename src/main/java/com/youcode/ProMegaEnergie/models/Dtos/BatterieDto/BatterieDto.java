@@ -14,4 +14,5 @@ public class BatterieDto {
     private float prix;
     private Agent agent;
     private AchatStatus achatStatus;
+    private String image;
 }

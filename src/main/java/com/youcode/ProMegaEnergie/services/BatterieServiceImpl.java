@@ -101,18 +101,19 @@ public class BatterieServiceImpl implements BatterieService {
 
     @Override
     public List<Batterie> getBatteriesByCherecher(String column, String cherecher) {
+        cherecher = cherecher.replace('¤',' ');
         switch (column) {
             case "prix" -> {
-                return batteryRepository.findAllByPrixAndAchatStatus(Float.parseFloat(cherecher), AchatStatus.NotPayed);
+                return batteryRepository.findByPrixAndAchatStatus(Float.parseFloat(cherecher), AchatStatus.NotPayed);
             }
             case "nom" -> {
-                return batteryRepository.findAllByNomAndAchatStatus(cherecher, AchatStatus.NotPayed);
+                return batteryRepository.findByNomContainingIgnoreCaseAndAchatStatus(cherecher, AchatStatus.NotPayed);
             }
             case "prix_nom" -> {
                 String[] cherecherArray = cherecher.split(",");
                 float prix = Float.parseFloat(cherecherArray[0]);
                 String nom = cherecherArray[1];
-                return batteryRepository.findAllByPrixAndNomAndAchatStatus(prix, nom, AchatStatus.NotPayed);
+                return batteryRepository.findByPrixAndNomContainingIgnoreCaseAndAchatStatus(prix, nom, AchatStatus.NotPayed);
             }
         }
         return null;

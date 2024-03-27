@@ -8,4 +8,6 @@ import lombok.Setter;
 public class VoitureResponseDto {
     private Long id;
     private String matrecule;
+    private String image;
+    private Float prix;
 }

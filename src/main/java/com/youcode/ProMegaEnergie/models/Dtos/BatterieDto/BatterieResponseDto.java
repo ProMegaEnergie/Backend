@@ -12,4 +12,5 @@ public class BatterieResponseDto {
     private String vis;
     private float  prix;
     private AchatStatus achatStatus;
+    private String image;
 }

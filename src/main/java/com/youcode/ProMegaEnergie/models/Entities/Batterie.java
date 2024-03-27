@@ -16,6 +16,7 @@ public class Batterie {
     private String nom;
     private String vis;
     private float prix;
+    private String image;
     @Enumerated(EnumType.STRING)
     private AchatStatus achatStatus;
     @ManyToOne
