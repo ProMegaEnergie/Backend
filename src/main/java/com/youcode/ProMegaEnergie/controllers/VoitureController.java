@@ -1,6 +1,7 @@
 package com.youcode.ProMegaEnergie.controllers;
 
 import com.youcode.ProMegaEnergie.models.Dtos.VoitureDto.VoitureDto;
+import com.youcode.ProMegaEnergie.models.Entities.AchatVoiture;
 import com.youcode.ProMegaEnergie.models.Entities.Voiture;
 import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import com.youcode.ProMegaEnergie.services.interfaces.VoitureService;
@@ -52,5 +53,9 @@ public class VoitureController {
     @DeleteMapping("/deleteVoiture/{idVoiture}")
     public Boolean deleteVoiture(@PathVariable Long idVoiture){
         return voitureService.deleteVoiture(idVoiture);
+    }
+    @PostMapping("/acheterVoiture")
+    public Boolean acheterVoiture(@RequestBody AchatVoiture achatVoiture){
+        return voitureService.acheterVoiture(achatVoiture);
     }
 }

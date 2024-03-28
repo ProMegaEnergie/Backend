@@ -2,11 +2,13 @@ package com.youcode.ProMegaEnergie.services;
 
 import com.youcode.ProMegaEnergie.models.Dtos.VoitureDto.VoitureDto;
 import com.youcode.ProMegaEnergie.models.Entities.AchatBatterie;
+import com.youcode.ProMegaEnergie.models.Entities.AchatVoiture;
 import com.youcode.ProMegaEnergie.models.Entities.Batterie;
 import com.youcode.ProMegaEnergie.models.Entities.Voiture;
 import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import com.youcode.ProMegaEnergie.models.Enums.StatusBattery;
 import com.youcode.ProMegaEnergie.repositories.AchatBatterieRepository;
+import com.youcode.ProMegaEnergie.repositories.AchatVoitureRepository;
 import com.youcode.ProMegaEnergie.repositories.VoitureRepository;
 import com.youcode.ProMegaEnergie.services.interfaces.VoitureService;
 import org.modelmapper.ModelMapper;
@@ -20,11 +22,13 @@ public class VoitureServiceImpl implements VoitureService {
     private final ModelMapper modelMapper;
     private final VoitureRepository voitureRepository;
     private final AchatBatterieRepository achatBatterieRepository;
+    private final AchatVoitureRepository achatVoitureRepository;
 
-    public VoitureServiceImpl(ModelMapper modelMapper, VoitureRepository voitureRepository, AchatBatterieRepository achatBatterieRepository) {
+    public VoitureServiceImpl(ModelMapper modelMapper, VoitureRepository voitureRepository, AchatBatterieRepository achatBatterieRepository, AchatVoitureRepository achatVoitureRepository) {
         this.modelMapper = modelMapper;
         this.voitureRepository = voitureRepository;
         this.achatBatterieRepository = achatBatterieRepository;
+        this.achatVoitureRepository = achatVoitureRepository;
     }
 
     @Override
@@ -88,13 +92,13 @@ public class VoitureServiceImpl implements VoitureService {
                 return voitureRepository.findAllByPrixAndAchatStatus(Float.parseFloat(cherecher), AchatStatus.NotPayed);
             }
             case "matrecule" -> {
-                return voitureRepository.findAllByMatreculeAndAchatStatus(cherecher, AchatStatus.NotPayed);
+                return voitureRepository.findAllByMatreculeContainingIgnoreCaseAndAchatStatus(cherecher, AchatStatus.NotPayed);
             }
             case "prix_matrecule" -> {
                 String[] cherecherArray = cherecher.split(",");
                 float prix = Float.parseFloat(cherecherArray[0]);
                 String matrecule = cherecherArray[1];
-                return voitureRepository.findAllByPrixAndMatreculeAndAchatStatus(prix, matrecule, AchatStatus.NotPayed);
+                return voitureRepository.findAllByPrixAndMatreculeContainingIgnoreCaseAndAchatStatus(prix, matrecule, AchatStatus.NotPayed);
             }
         }
         return null;
@@ -104,6 +108,18 @@ public class VoitureServiceImpl implements VoitureService {
     public Boolean deleteVoiture(Long idVoiture) {
         if (voitureRepository.existsById(idVoiture)){
             voitureRepository.deleteById(idVoiture);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean acheterVoiture(AchatVoiture achatVoiture) {
+        if (voitureRepository.existsById(achatVoiture.getVoiture().getId())){
+            Voiture voiture = voitureRepository.findById(achatVoiture.getVoiture().getId()).get();
+            voiture.setAchatStatus(AchatStatus.Payed);
+            voitureRepository.save(voiture);
+            achatVoitureRepository.save(achatVoiture);
             return true;
         }
         return false;

@@ -1,6 +1,5 @@
 package com.youcode.ProMegaEnergie.models.Entities;
 
-import com.youcode.ProMegaEnergie.models.Enums.AchatStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
