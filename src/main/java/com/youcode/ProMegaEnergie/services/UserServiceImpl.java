@@ -12,6 +12,8 @@ import com.youcode.ProMegaEnergie.models.Enums.RoleUser;
 import com.youcode.ProMegaEnergie.repositories.*;
 import com.youcode.ProMegaEnergie.services.interfaces.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     private final AdminRepository adminRepository;
     private final ClientRepository clientRepository;
     private final AgentRepository agentRepository;
@@ -42,7 +47,49 @@ public class UserServiceImpl implements UserService {
     public Optional Login(UserDto userDto) {
         String email = userDto.getEmail();
         String password = userDto.getPassword();
-        if(!adminRepository.existsByEmailAndPassword(email, password)){
+
+        if (!adminRepository.existsByEmail(email)){
+            if (!clientRepository.existsByEmail(email)){
+                if (!agentRepository.existsByEmail(email)){
+                    if (!societeRepository.existsByEmail(email)){
+                        return Optional.empty();
+                    }
+                    else {
+                        Societe societe = societeRepository.findByEmail(email).orElse(null);
+                        if (societe == null) throw new AssertionError();
+                        String societePassword = societe.getPassword();
+                        if (passwordEncoder.matches(password, societePassword)) {
+                            return Optional.ofNullable(modelMapper.map(societe, SocieteDto.class));
+                        }
+                    }
+                }
+                else {
+                    Agent agent = agentRepository.findByEmail(email).orElse(null);
+                    if (agent == null) throw new AssertionError();
+                    String agentPassword = agent.getPassword();
+                    if (passwordEncoder.matches(password, agentPassword)) {
+                        return Optional.ofNullable(modelMapper.map(agent, AgentDto.class));
+                    }
+                }
+            } else {
+                Client client = clientRepository.findByEmail(email).orElse(null);
+                if (client == null) throw new AssertionError();
+                String clientPassword = client.getPassword();
+                if (passwordEncoder.matches(password, clientPassword)) {
+                    return Optional.ofNullable(modelMapper.map(client, ClientDto.class));
+                }
+            }
+        }
+        else {
+            Admin admin = adminRepository.findByEmail(email).orElse(null);
+            if (admin == null) throw new AssertionError();
+            String adminPassword = admin.getPassword();
+            if (passwordEncoder.matches(password, adminPassword)) {
+                return Optional.ofNullable(modelMapper.map(admin, AdminDto.class));
+            }
+        }
+
+        /*if(!adminRepository.existsByEmailAndPassword(email, password)){
             if(!clientRepository.existsByEmailAndPassword(email, password)){
                 if(!agentRepository.existsByEmailAndPassword(email, password)){
                     if(!societeRepository.existsByEmailAndPassword(email, password)){
@@ -59,10 +106,12 @@ public class UserServiceImpl implements UserService {
                 Client client = clientRepository.findByEmailAndPassword(email, password).orElse(null);
                 return Optional.ofNullable(modelMapper.map(client, ClientDto.class));
             }
-        } else {
+        }
+        else {
             Admin admin = adminRepository.findByEmailAndPassword(email, password).orElse(null);
             return Optional.ofNullable(modelMapper.map(admin, AdminDto.class));
-        }
+        }*/
+        return Optional.empty();
     }
 
     @Override
@@ -131,6 +180,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updatePassword(ValidationDto validationDto, String newPassword) {
+        newPassword = passwordEncoder.encode(newPassword);
         if (validationRepository.existsByEmailAndCodeAndRoleUser(validationDto.getEmail(), validationDto.getCode(), validationDto.getRoleUser())) {
             if (validationDto.getRoleUser() == RoleUser.Admin) {
                 Admin admin = adminRepository.findByEmail(validationDto.getEmail()).orElse(null);
@@ -169,6 +219,10 @@ public class UserServiceImpl implements UserService {
 
         if (roleUser == RoleUser.Admin) {
             Admin admin = modelMapper.map(userObject, Admin.class);
+
+            String encodedPassword = passwordEncoder.encode(admin.getPassword());
+            admin.setPassword(encodedPassword);
+
             adminRepository.save(admin);
             UserDto userDto = new UserDto();
             userDto.setEmail(admin.getEmail());
@@ -177,6 +231,10 @@ public class UserServiceImpl implements UserService {
             return true;
         } else if (roleUser == RoleUser.Client) {
             Client client = modelMapper.map(userObject, Client.class);
+
+            String encodedPassword = passwordEncoder.encode(client.getPassword());
+            client.setPassword(encodedPassword);
+
             clientRepository.save(client);
             UserDto userDto = new UserDto();
             userDto.setEmail(client.getEmail());
@@ -185,6 +243,10 @@ public class UserServiceImpl implements UserService {
             return true;
         } else if (roleUser == RoleUser.Agent) {
             Agent agent = modelMapper.map(userObject, Agent.class);
+
+            String encodedPassword = passwordEncoder.encode(agent.getPassword());
+            agent.setPassword(encodedPassword);
+
             agentRepository.save(agent);
             UserDto userDto = new UserDto();
             userDto.setEmail(agent.getEmail());
@@ -193,6 +255,10 @@ public class UserServiceImpl implements UserService {
             return true;
         } else if (roleUser == RoleUser.Societe) {
             Societe societe = modelMapper.map(userObject, Societe.class);
+
+            String encodedPassword = passwordEncoder.encode(societe.getPassword());
+            societe.setPassword(encodedPassword);
+
             societeRepository.save(societe);
             UserDto userDto = new UserDto();
             userDto.setEmail(societe.getEmail());
@@ -269,6 +335,9 @@ public class UserServiceImpl implements UserService {
         String objectStringPassword = objectStringArray[1];
         String email = objectStringEmail.split("email=")[1];
         String password = objectStringPassword.split("password=")[1];
+
+        password = passwordEncoder.encode(password);
+
         if (adminRepository.existsByEmail(email) || agentRepository.existsByEmail(email) || clientRepository.existsByEmail(email) || societeRepository.existsByEmail(email)){
             return null;
         }

@@ -19,7 +19,7 @@ public class ProMegaEnergie {
             Admin admin = new Admin();
             admin.setId(1L);
             admin.setEmail("uanemaro216@gmail.com");
-            admin.setPassword("Marouane216@");
+            admin.setPassword("$2a$10$evkiO.g1GLODwm7D19K5uOFz96BAqsJHpfU77Rk7Be8K1KccqtxB6");
             admin.setRoleUser(RoleUser.Admin);
             adminRepository.save(admin);
         };
