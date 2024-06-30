@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ProMegaEnergie
-    username: admin
+    url: jdbc:postgresql://localhost:5432/CRMEF
+    username: postgres
     password:
   jpa:
     hibernate:
