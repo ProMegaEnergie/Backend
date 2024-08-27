@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.youcode</groupId>
-    <artifactId>CRMEF</artifactId>
+    <artifactId>ProMegaEnergie</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProMegaEnergie</name>
     <description>ProMegaEnergie</description>

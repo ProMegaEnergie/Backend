@@ -18,7 +18,7 @@
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Read Battery By Id enseignant
+## End-point: Read Battery By Id agent
 ### Method: GET
 >```
 >http://localhost:8080/api/Batterie/ReadBattery/:idAgent
@@ -26,7 +26,7 @@
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: Read Battery By Id Battery And By Id enseignant
+## End-point: Read Battery By Id Battery And By Id agent
 ### Method: GET
 >```
 >http://localhost:8080/api/Batterie/ReadBattery/:idBattery/:idAgent
@@ -43,7 +43,7 @@
 
 ```json
 {
-    "enseignant": {
+    "agent": {
         "id": 1
     },
     "nom": "NAME",
@@ -65,7 +65,7 @@
 ```json
 {
     "id":6,
-    "enseignant": {
+    "agent": {
         "id": 1
     },
     "nom": "NAME",
@@ -98,7 +98,7 @@
     "batterie": {
         "id": 7
     },
-    "chefFiliere": {
+    "societe": {
         "id": 5
     }
 }
@@ -153,7 +153,7 @@
 {
     "email": "PASSWORD@gmail.com",
     "code": 522488,
-    "roleUser": "Formateur"// or "Enseignant" or "ChefFiliere"
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
 ```
 
@@ -170,7 +170,7 @@
 ```json
 {
     "email": "USERNAME@gmail.com",
-    "roleUser": "Formateur"// or "Enseignant" or "ChefFiliere"
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
 ```
 
@@ -188,7 +188,7 @@
 {
     "email": "PASSWORD@gmail.com",
     "code": 522488,
-    "roleUser": "Formateur"// or "Enseignant" or "ChefFiliere"
+    "roleUser": "Client"// or "Agent" or "Societe"
 }
 ```
 
@@ -203,34 +203,34 @@
 ### Body (**raw**)
 
 ```json
-// ChefFiliere
+// Societe
 // {
 //     "email": "USERNAME@gmail.com",
 //     "password": "PASSWORD",
 //     "image": "IMAGE",
 //     "nom": "NAME",
 //     "isVerifie": false,
-//     "roleUser": "ChefFiliere"
+//     "roleUser": "Societe"
 // }
 
-// Formateur
+// Client
 {
     "email": "USERNAME@gmail.com",
     "password": "PASSWORD",
     "nom": "LAST_NAME",
     "prenom": "FIRST_NAME",
     "isVerifie": false,
-    "roleUser": "Formateur"
+    "roleUser": "Client"
 }
 
-//Enseignant
+//Agent
 // {
 //     "email": "USERNAME@gmail.com",
 //     "password": "PASSWORD",
 //     "prenom": "FIRST_NAME",
 //     "nom": "LAST_NAME",
 //     "isVerifie": false,
-//     "roleUser": "Enseignant"
+//     "roleUser": "Agent"
 // }
 ```
 
@@ -261,7 +261,7 @@
 ### Body (**raw**)
 
 ```json
-// Formateur
+// Client
 {
     "email": "USERNAME@gmail.com",
     "password": "PASSWORD",
@@ -269,7 +269,7 @@
     "nom": "LAST_NAME"
 }
 
-// Enseignant
+// Agent
 // {
 //     "email": "USERNAME@gmail.com",
 //     "password": "PASSWORD",
@@ -297,7 +297,7 @@
 ### Body (**raw**)
 
 ```json
-// Formateur
+// Client
 {
     "id":1,
     "email": "USERNAME@gmail.com",
@@ -306,7 +306,7 @@
     "nom": "LAST_NAME"
 }
 
-// Enseignant
+// Agent
 // {
 //     "id":1,
 //     "email": "USERNAME@gmail.com",
@@ -391,7 +391,7 @@
   "batterie": {
     "id": 7
   },
-  "chefFiliere": {
+  "societe": {
     "id": 5
   },
   "matrecule": "MATRECULE" // type :String
@@ -415,7 +415,7 @@
   "batterie": {
     "id": 7
   },
-  "chefFiliere": {
+  "societe": {
     "id": 5
   },
   "matrecule": "MATRECULE" // type :String

@@ -1,14 +1,8 @@
 spring:
   datasource:
-<<<<<<< HEAD
     url: jdbc:postgresql://localhost:5432/ProMegaEnergie
-    username: postgres
-    password: MAROUANE216@
-=======
-    url: jdbc:postgresql://localhost:5432/CRMEF
-    username: postgres
+    username: admin
     password:
->>>>>>> 25b717bf45612511aedbafed80f0cf7622820002
   jpa:
     hibernate:
       ddl-auto: update
